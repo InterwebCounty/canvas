@@ -13,15 +13,17 @@ import (
 
 	"github.com/InterwebCounty/canvas/backend/backendbase"
 	"github.com/golang/freetype"
-	"github.com/golang/freetype/truetype"
+
+	//"github.com/golang/freetype/truetype"
 	"golang.org/x/image/font"
+	"golang.org/x/image/font/opentype"
 	"golang.org/x/image/math/fixed"
 )
 
 // Font is a loaded font that can be passed to the
 // SetFont method
 type Font struct {
-	font *truetype.Font
+	font *opentype.Font
 }
 
 type fontKey struct {
@@ -35,7 +37,7 @@ type frCache struct {
 }
 
 type fontPathCache struct {
-	cache    map[truetype.Index]*Path2D
+	cache    map[opentype.Index]*Path2D
 	lastUsed time.Time
 }
 
@@ -49,7 +51,7 @@ func (fpc *fontPathCache) size() int {
 }
 
 type fontTriCache struct {
-	cache    map[truetype.Index][]backendbase.Vec
+	cache    map[opentype.Index][]backendbase.Vec
 	lastUsed time.Time
 }
 
@@ -81,7 +83,7 @@ func (cv *Canvas) LoadFont(src interface{}) (*Font, error) {
 
 	var f *Font
 	switch v := src.(type) {
-	case *truetype.Font:
+	case *opentype.Font:
 		f = &Font{font: v}
 	case string:
 		data, err := ioutil.ReadFile(v)
@@ -199,7 +201,7 @@ func (cv *Canvas) FillText(str string, x, y float64) {
 	// render the string into textImage
 	curX := x
 	p := fixed.Point26_6{}
-	prev, hasPrev := truetype.Index(0), false
+	prev, hasPrev := opentype.Index(0), false
 	for _, rn := range str {
 		idx := fnt.Index(rn)
 		if idx == 0 {
@@ -258,7 +260,7 @@ func (cv *Canvas) fillText2(str string, x, y float64) {
 	scale := float64(cv.state.fontSize) / float64(baseFontSize)
 	scaleMat := backendbase.MatScale(backendbase.Vec{scale, scale})
 
-	prev, hasPrev := truetype.Index(0), false
+	prev, hasPrev := opentype.Index(0), false
 	for _, rn := range str {
 		idx := fnt.Index(rn)
 		if idx == 0 {
@@ -307,7 +309,7 @@ func (cv *Canvas) StrokeText(str string, x, y float64) {
 	scale := float64(cv.state.fontSize) / float64(baseFontSize)
 	scaleMat := backendbase.MatScale(backendbase.Vec{scale, scale})
 
-	prev, hasPrev := truetype.Index(0), false
+	prev, hasPrev := opentype.Index(0), false
 	for _, rn := range str {
 		idx := fnt.Index(rn)
 		if idx == 0 {
@@ -338,7 +340,7 @@ func (cv *Canvas) StrokeText(str string, x, y float64) {
 func (cv *Canvas) measureTextRendering(str string, x, y *float64, frc *frContext, scale float64) (int, int, image.Point, string) {
 	// measure rendered text size
 	var p fixed.Point26_6
-	prev, hasPrev := truetype.Index(0), false
+	prev, hasPrev := opentype.Index(0), false
 	var textOffset image.Point
 	var strWidth, strMaxY int
 	strMinY := math.MaxInt32
@@ -397,7 +399,7 @@ func (cv *Canvas) measureTextRendering(str string, x, y *float64, frc *frContext
 
 	// find out which characters are inside the visible area
 	p = fixed.Point26_6{}
-	prev, hasPrev = truetype.Index(0), false
+	prev, hasPrev = opentype.Index(0), false
 	var insideCount int
 	strFrom, strTo := 0, len(str)
 	curInside := false
@@ -456,7 +458,7 @@ func (cv *Canvas) measureTextRendering(str string, x, y *float64, frc *frContext
 	if strFrom > 0 || strTo < len(str) {
 		str = str[strFrom:strTo]
 		p = fixed.Point26_6{}
-		prev, hasPrev = truetype.Index(0), false
+		prev, hasPrev = opentype.Index(0), false
 		textOffset = image.Point{}
 		strWidth, strMaxY = 0, 0
 		for i, rn := range str {
@@ -515,7 +517,7 @@ func (cv *Canvas) runePath(rn rune) *Path2D {
 
 	const scale = 1.0 / 64.0
 
-	var gb truetype.GlyphBuf
+	var gb opentype.GlyphBuf
 	gb.Load(cv.state.font.font, baseFontSize, idx, font.HintingFull)
 
 	from := 0
@@ -523,7 +525,7 @@ func (cv *Canvas) runePath(rn rune) *Path2D {
 		ps := gb.Points[from:to]
 
 		start := ps[0]
-		others := []truetype.Point(nil)
+		others := []opentype.Point(nil)
 		if ps[0].Flags&0x01 != 0 {
 			others = ps[1:]
 		} else {
@@ -532,7 +534,7 @@ func (cv *Canvas) runePath(rn rune) *Path2D {
 				start = last
 				others = ps[:len(ps)-1]
 			} else {
-				start = truetype.Point{
+				start = opentype.Point{
 					X: (start.X + last.X) / 2,
 					Y: (start.Y + last.Y) / 2,
 				}
@@ -576,7 +578,7 @@ func (cv *Canvas) runePath(rn rune) *Path2D {
 
 	cache, ok := cv.fontPathCache[cv.state.font]
 	if !ok {
-		cache = &fontPathCache{cache: make(map[truetype.Index]*Path2D, 1024)}
+		cache = &fontPathCache{cache: make(map[opentype.Index]*Path2D, 1024)}
 		cv.fontPathCache[cv.state.font] = cache
 	}
 	cache.lastUsed = time.Now()
@@ -600,7 +602,7 @@ func (cv *Canvas) runeTris(rn rune) []backendbase.Vec {
 
 	const scale = 1.0 / 64.0
 
-	var gb truetype.GlyphBuf
+	var gb opentype.GlyphBuf
 	gb.Load(cv.state.font.font, baseFontSize, idx, font.HintingFull)
 
 	contours := make([][]backendbase.Vec, 0, len(gb.Ends))
@@ -610,7 +612,7 @@ func (cv *Canvas) runeTris(rn rune) []backendbase.Vec {
 		ps := gb.Points[from:to]
 
 		start := ps[0]
-		others := []truetype.Point(nil)
+		others := []opentype.Point(nil)
 		if ps[0].Flags&0x01 != 0 {
 			others = ps[1:]
 		} else {
@@ -619,7 +621,7 @@ func (cv *Canvas) runeTris(rn rune) []backendbase.Vec {
 				start = last
 				others = ps[:len(ps)-1]
 			} else {
-				start = truetype.Point{
+				start = opentype.Point{
 					X: (start.X + last.X) / 2,
 					Y: (start.Y + last.Y) / 2,
 				}
@@ -719,7 +721,7 @@ func (cv *Canvas) runeTris(rn rune) []backendbase.Vec {
 
 	cache, ok := cv.fontTriCache[cv.state.font]
 	if !ok {
-		cache = &fontTriCache{cache: make(map[truetype.Index][]backendbase.Vec, 1024)}
+		cache = &fontTriCache{cache: make(map[opentype.Index][]backendbase.Vec, 1024)}
 		cv.fontTriCache[cv.state.font] = cache
 	}
 	cache.lastUsed = time.Now()
@@ -749,7 +751,7 @@ func (cv *Canvas) MeasureText(str string) TextMetrics {
 	var x float64
 	var minY float64
 	var maxY float64
-	prev, hasPrev := truetype.Index(0), false
+	prev, hasPrev := opentype.Index(0), false
 	for _, rn := range str {
 		idx := fnt.Index(rn)
 		if idx == 0 {
