@@ -11,10 +11,10 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/InterwebCounty/canvas"
+	"github.com/InterwebCounty/canvas/backend/softwarebackend"
+	"github.com/InterwebCounty/canvas/sdlcanvas"
 	"github.com/go-gl/gl/v3.2-core/gl"
-	"github.com/tfriedel6/canvas"
-	"github.com/tfriedel6/canvas/backend/softwarebackend"
-	"github.com/tfriedel6/canvas/sdlcanvas"
 )
 
 var usesw = false

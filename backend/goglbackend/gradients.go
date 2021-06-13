@@ -1,8 +1,8 @@
 package goglbackend
 
 import (
-	"github.com/tfriedel6/canvas/backend/backendbase"
-	"github.com/tfriedel6/canvas/backend/goglbackend/gl"
+	"github.com/InterwebCounty/canvas/backend/backendbase"
+	"github.com/InterwebCounty/canvas/backend/goglbackend/gl"
 )
 
 // LinearGradient is a gradient with any number of
