@@ -4,7 +4,7 @@ import (
 	"math"
 	"sort"
 
-	"github.com/InterwebCounty/canvas/backend/backendbase"
+	"github.com/tfriedel6/canvas/backend/backendbase"
 )
 
 // Go port of https://github.com/mapbox/earcut.hpp

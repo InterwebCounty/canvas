@@ -4,7 +4,7 @@ import (
 	"image"
 	"image/draw"
 
-	"github.com/InterwebCounty/canvas/backend/backendbase"
+	"github.com/tfriedel6/canvas/backend/backendbase"
 )
 
 type SoftwareBackend struct {

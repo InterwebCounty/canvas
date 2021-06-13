@@ -11,9 +11,9 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/InterwebCounty/canvas/backend/backendbase"
 	"github.com/golang/freetype"
 	"github.com/golang/freetype/truetype"
+	"github.com/tfriedel6/canvas/backend/backendbase"
 	"golang.org/x/image/font"
 	"golang.org/x/image/math/fixed"
 )

@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/InterwebCounty/canvas/backend/backendbase"
+	"github.com/tfriedel6/canvas/backend/backendbase"
 )
 
 // Image is a type holding information on an image loaded with the LoadImage

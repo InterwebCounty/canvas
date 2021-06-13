@@ -4,7 +4,7 @@ import (
 	"image/color"
 	"runtime"
 
-	"github.com/InterwebCounty/canvas/backend/backendbase"
+	"github.com/tfriedel6/canvas/backend/backendbase"
 )
 
 // LinearGradient is a gradient with any number of

@@ -3,8 +3,8 @@ package goglbackend
 import (
 	"fmt"
 
-	"github.com/InterwebCounty/canvas/backend/backendbase"
-	"github.com/InterwebCounty/canvas/backend/goglbackend/gl"
+	"github.com/tfriedel6/canvas/backend/backendbase"
+	"github.com/tfriedel6/canvas/backend/goglbackend/gl"
 )
 
 const alphaTexSize = 2048

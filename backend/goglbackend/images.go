@@ -5,8 +5,8 @@ import (
 	"image"
 	"unsafe"
 
-	"github.com/InterwebCounty/canvas/backend/backendbase"
-	"github.com/InterwebCounty/canvas/backend/goglbackend/gl"
+	"github.com/tfriedel6/canvas/backend/backendbase"
+	"github.com/tfriedel6/canvas/backend/goglbackend/gl"
 )
 
 // Image represents a loaded image that can be used in various drawing functions

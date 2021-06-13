@@ -5,7 +5,7 @@ import (
 	"image/color"
 	"math"
 
-	"github.com/InterwebCounty/canvas/backend/backendbase"
+	"github.com/tfriedel6/canvas/backend/backendbase"
 )
 
 func (b *SoftwareBackend) Clear(pts [4]backendbase.Vec) {

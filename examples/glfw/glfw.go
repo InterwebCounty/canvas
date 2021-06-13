@@ -4,10 +4,10 @@ import (
 	"log"
 	"runtime"
 
-	"github.com/InterwebCounty/canvas"
-	"github.com/InterwebCounty/canvas/backend/goglbackend"
 	"github.com/go-gl/gl/v3.2-core/gl"
 	"github.com/go-gl/glfw/v3.3/glfw"
+	"github.com/tfriedel6/canvas"
+	"github.com/tfriedel6/canvas/backend/goglbackend"
 )
 
 func main() {

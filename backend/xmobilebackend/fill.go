@@ -5,7 +5,7 @@ import (
 	"math"
 	"unsafe"
 
-	"github.com/InterwebCounty/canvas/backend/backendbase"
+	"github.com/tfriedel6/canvas/backend/backendbase"
 	"golang.org/x/mobile/gl"
 )
 

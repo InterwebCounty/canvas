@@ -3,8 +3,8 @@ package example
 import (
 	"math"
 
-	"github.com/InterwebCounty/canvas"
-	"github.com/InterwebCounty/canvas/backend/goglbackend"
+	"github.com/tfriedel6/canvas"
+	"github.com/tfriedel6/canvas/backend/goglbackend"
 )
 
 var cv *canvas.Canvas

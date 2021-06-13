@@ -3,7 +3,7 @@ package canvas
 import (
 	"math"
 
-	"github.com/InterwebCounty/canvas/backend/backendbase"
+	"github.com/tfriedel6/canvas/backend/backendbase"
 )
 
 // Path2D is a type that holds a predefined path which can be drawn
