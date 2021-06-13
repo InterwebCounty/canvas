@@ -9,8 +9,9 @@ import (
 	"time"
 
 	"github.com/InterwebCounty/canvas/backend/backendbase"
-	"github.com/golang/freetype/truetype"
+	//"github.com/golang/freetype/truetype"
 	"golang.org/x/image/font"
+	"golang.org/x/image/font/opentype"
 	"golang.org/x/image/math/fixed"
 )
 
@@ -301,7 +302,8 @@ func (cv *Canvas) SetFont(src interface{}, size float64) {
 		cv.state.font = cv.getFont(src)
 	}
 
-	fontFace := truetype.NewFace(cv.state.font.font, &truetype.Options{Size: size})
+	//fontFace := truetype.NewFace(cv.state.font.font, &truetype.Options{Size: size})
+	fontFace := opentype.NewFace(cv.state.font.font, &opentype.Options{Size: size})
 	cv.state.fontMetrics = fontFace.Metrics()
 }
 
