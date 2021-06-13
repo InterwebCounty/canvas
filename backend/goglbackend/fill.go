@@ -5,8 +5,8 @@ import (
 	"math"
 	"unsafe"
 
-	"github.com/tfriedel6/canvas/backend/backendbase"
-	"github.com/tfriedel6/canvas/backend/goglbackend/gl"
+	"github.com/InterwebCounty/canvas/backend/backendbase"
+	"github.com/InterwebCounty/canvas/backend/goglbackend/gl"
 )
 
 func (b *GoGLBackend) Clear(pts [4]backendbase.Vec) {

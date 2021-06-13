@@ -9,9 +9,9 @@ import (
 	"time"
 	"unicode/utf8"
 
+	"github.com/InterwebCounty/canvas"
+	"github.com/InterwebCounty/canvas/backend/goglbackend"
 	"github.com/go-gl/gl/v3.2-core/gl"
-	"github.com/tfriedel6/canvas"
-	"github.com/tfriedel6/canvas/backend/goglbackend"
 	"github.com/veandco/go-sdl2/sdl"
 )
 

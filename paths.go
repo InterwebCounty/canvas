@@ -3,7 +3,7 @@ package canvas
 import (
 	"math"
 
-	"github.com/tfriedel6/canvas/backend/backendbase"
+	"github.com/InterwebCounty/canvas/backend/backendbase"
 )
 
 // BeginPath clears the current path and starts a new one

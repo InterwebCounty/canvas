@@ -5,7 +5,7 @@ import (
 	"log"
 	"math"
 
-	"github.com/tfriedel6/canvas/sdlcanvas"
+	"github.com/InterwebCounty/canvas/sdlcanvas"
 )
 
 func main() {
